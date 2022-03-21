@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import re
 import csv
 import os
-import mysql.connector 
+#import mysql.connector 
 
 #filepath = 'highlights_and_improvements_mn_eur_2021_12_000.html'
 folderpath= str(os.getenv("folderpath"))
@@ -24,18 +24,18 @@ class CountryData:
     def __str__(self):
         return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.name, self.code, self.description)
 
-def storage_db(c,d):
-    data_ver=os.getenv("RealeaseVersion")
-    cnx = mysql.connector.connect(user='test_user', password= '123456',
-                                host='127.0.0.1',
-                                database='mtc_autobuild')
-    cnx_cursor=cnx.cursor()
-    insert_stmt =("INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s)" \
-        f" ON DUPLICATE KEY UPDATE highlights=values(highlights)")
-    data=(data_ver, c, d)
-    cnx_cursor.execute(insert_stmt,data)
-    cnx.commit()
-    cnx.close()
+#def storage_db(c,d):
+#    data_ver=os.getenv("RealeaseVersion")
+ #   cnx = mysql.connector.connect(user='test_user', password= '123456',
+ #                              host='127.0.0.1',
+ #                               database='mtc_autobuild')
+ #  cnx_cursor=cnx.cursor()
+  #  insert_stmt =("INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s)" \
+  #      f" ON DUPLICATE KEY UPDATE highlights=values(highlights)")
+  #  data=(data_ver, c, d)
+  #  cnx_cursor.execute(insert_stmt,data)
+   # cnx.commit()
+   # cnx.close()
 
 
 # function to match the country name with the ISO code from the country_names csv file
@@ -110,9 +110,9 @@ def pulling_data():
                 print(entry.name,"(",entry.code,")","\n",entry.description)
             
  
-def pushing_data():
-    for country in country_isocode_description:
-        storage_db(country.code, country.description)
+#def pushing_data():
+ #   for country in country_isocode_description:
+ #       storage_db(country.code, country.description)
 
 
 pulling_data()
