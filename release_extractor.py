@@ -86,7 +86,7 @@ def pulling_data():
                 sanitize = re.sub(r"[\n\t]*", "", d.text)
                 sanitize = re.sub(' +', " ", sanitize)
                 # replace the periods with periods and new line
-                if((d.text).find('. ')):
+                if((sanitize).find('. ')):
                     sanitize = re.sub('\.', ".\\n", sanitize)
                     sanitize = sanitize.strip()
                 descriptions.append(sanitize)
