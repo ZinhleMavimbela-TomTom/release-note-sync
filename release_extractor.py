@@ -86,8 +86,9 @@ def pulling_data():
                 sanitize = re.sub(r"[\n\t]*", "", d.text)
                 sanitize = re.sub(' +', " ", sanitize)
                 # replace the periods with periods and new line
-                sanitize = re.sub('\.', ".\\n", sanitize)
-                sanitize = sanitize.strip()
+                if((d.text).find('. '):
+                    sanitize = re.sub('\.', ".\\n", sanitize)
+                    sanitize = sanitize.strip()
                 descriptions.append(sanitize)
             #remove introduction and general from both country names and the descriptions
             del country_names[:2]
