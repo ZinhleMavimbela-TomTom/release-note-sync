@@ -111,7 +111,7 @@ def pulling_data():
 
              # print to check 
             print("____________________________________________________________________________________________________________________________________")
-            print(country_isocode_description.data_ver)
+            print(CountryData.data_ver)
             for entry in country_isocode_description:
                 print("__________________________________________________________________________________________________________________________________")
                 print(entry.name,"(",entry.code,")","\n",entry.description)
