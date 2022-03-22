@@ -16,15 +16,16 @@ country_isocode_description = []
 # class CountryData is to hold the name, the ISO code, and the description of each country found in the HTML file
 html_countryname=[]
 class CountryData:
-    def __init__(self, name, code, description):
+    def __init__(self,data_ver, name, code, description):
+        self.data_ver= data_ver
         self.name = name
         self.code = code
         self.description = description
  # printing helper    
     def __str__(self):
-        return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.name, self.code, self.description)
+        return "data source version: %s, country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
 
-#def storage_db(c,d):
+#def storage_db(b,c,d):
 #    data_ver=os.getenv("RealeaseVersion")
  #   cnx = mysql.connector.connect(user='test_user', password= '123456',
  #                              host='127.0.0.1',
@@ -32,7 +33,7 @@ class CountryData:
  #  cnx_cursor=cnx.cursor()
   #  insert_stmt =("INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s)" \
   #      f" ON DUPLICATE KEY UPDATE highlights=values(highlights)")
-  #  data=(data_ver, c, d)
+  #  data=(b, c, d)
   #  cnx_cursor.execute(insert_stmt,data)
    # cnx.commit()
    # cnx.close()
@@ -63,6 +64,10 @@ def pulling_data():
         with open(os.path.join(folderpath,file), 'r') as html_file:
             content = html_file.read()
             soup = BeautifulSoup(content, 'html.parser')
+             #get the data source version from the html title
+            title_string=(soup.find('title'))
+            data_source_version =((title_string.text).split()[2])
+             
              # country names have the h2 tag in the HTML file
             country_name_tags = soup.find_all('h2')
             country_names = []
@@ -100,11 +105,13 @@ def pulling_data():
             if(len(country_names) == len(iso_codes) == len(descriptions)):
                 for i in range(len(country_names)):
                      # combine all information into the class
-                    country_isocode_description.append(CountryData(country_names[i], iso_codes[i], descriptions[i]))
+                    country_isocode_description.append(CountryData(data_source_version,country_names[i], iso_codes[i], descriptions[i]))
             else:
                 print("Error sizes do not match")
 
              # print to check 
+            print("____________________________________________________________________________________________________________________________________")
+            print(country_isocode_description.data_ver)
             for entry in country_isocode_description:
                 print("__________________________________________________________________________________________________________________________________")
                 print(entry.name,"(",entry.code,")","\n",entry.description)
@@ -112,7 +119,7 @@ def pulling_data():
  
 #def pushing_data():
  #   for country in country_isocode_description:
- #       storage_db(country.code, country.description)
+ #       storage_db(country.data_ver,country.code, country.description)
 
 
 pulling_data()
