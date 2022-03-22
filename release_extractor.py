@@ -17,13 +17,12 @@ country_isocode_description = []
 html_countryname=[]
 class CountryData:
     def __init__(self,data_ver, name, code, description):
-        self.data_ver= data_ver
         self.name = name
         self.code = code
         self.description = description
  # printing helper    
     def __str__(self):
-        return "data source version: %s, country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
+        return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
 
 #def storage_db(b,c,d):
 #    data_ver=os.getenv("RealeaseVersion")
@@ -66,7 +65,7 @@ def pulling_data():
             soup = BeautifulSoup(content, 'html.parser')
              #get the data source version from the html title
             title_string=(soup.find('title'))
-            data_source_version =((title_string.text).split()[2])
+            data_source_version = ((title_string.text).split()[2])
              
              # country names have the h2 tag in the HTML file
             country_name_tags = soup.find_all('h2')
@@ -111,7 +110,7 @@ def pulling_data():
 
              # print to check 
             print("____________________________________________________________________________________________________________________________________")
-            print(CountryData.data_ver)
+            print(data_source_version)
             for entry in country_isocode_description:
                 print("__________________________________________________________________________________________________________________________________")
                 print(entry.name,"(",entry.code,")","\n",entry.description)
