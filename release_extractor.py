@@ -4,11 +4,10 @@ import csv
 import os
 #import mysql.connector 
 
-#filepath = 'highlights_and_improvements_mn_eur_2021_12_000.html'
 folderpath= str(os.getenv("folderpath"))
 
-#csvfilepath ='country_names.csv'
-csvfilepath = str(os.getenv("csvfilepath"))
+csvfilepath ='country_names.csv'
+#csvfilepath = str(os.getenv("csvfilepath"))
 
 #local container for country name and description
 country_isocode_description = []
@@ -25,7 +24,6 @@ class CountryData:
         return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
 
 #def storage_db(b,c,d):
-#    data_ver=os.getenv("RealeaseVersion")
  #   cnx = mysql.connector.connect(user='test_user', password= '123456',
  #                              host='127.0.0.1',
  #                               database='mtc_autobuild')
@@ -120,7 +118,7 @@ def pulling_data():
  
 #def pushing_data():
  #   for country in country_isocode_description:
- #       storage_db(country.data_ver,country.code, country.description)
+ #       storage_db(data_source_version,country.code, country.description)
 
 
 pulling_data()
