@@ -13,8 +13,9 @@ country_isocode_description = []
 # class CountryData is to hold the name, the ISO code, and the description of each country found in the HTML file
 html_countryname=[]
 class CountryData:
-    def __init__(self,data_ver, name, code, description):
+    def __init__(self, name, data_ver, code, description):
         self.name = name
+        self.data_ver = data_ver
         self.code = code
         self.description = description
  # printing helper    
@@ -100,16 +101,16 @@ def pulling_data():
             if(len(country_names) == len(iso_codes) == len(descriptions)):
                 for i in range(len(country_names)):
                      # combine all information into the class
-                    country_isocode_description.append(CountryData(data_source_version,country_names[i], iso_codes[i], descriptions[i]))
+                    country_isocode_description.append(CountryData(country_names[i], data_source_version, iso_codes[i], descriptions[i]))
             else:
                 print("Error sizes do not match")
 
-             # print to check 
-            print("____________________________________________________________________________________________________________________________________")
-            print(data_source_version)
-            for entry in country_isocode_description:
-                print("__________________________________________________________________________________________________________________________________")
-                print(entry.name,"(",entry.code,")","\n",entry.description)
+def print_all():
+    # print to check 
+    print("____________________________________________________________________________________________________________________________________")
+    for entry in country_isocode_description:
+        print("__________________________________________________________________________________________________________________________________")
+        print(entry.name,"(",entry.code,")-",entry.data_ver,"\n",entry.description)
             
  
 #def pushing_data():
@@ -118,4 +119,5 @@ def pulling_data():
 
 
 pulling_data()
+print_all()
 #pushing_data()
