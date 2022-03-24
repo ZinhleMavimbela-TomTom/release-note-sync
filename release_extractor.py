@@ -2,7 +2,8 @@ from bs4 import BeautifulSoup
 import re
 import csv
 import os
-#import mysql.connector 
+import psycopg2
+import psycopg2.extras
 
 folderpath= str(os.getenv("folderpath"))
 
@@ -22,17 +23,19 @@ class CountryData:
     def __str__(self):
         return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
 
-#def storage_db(b,c,d):
- #   cnx = mysql.connector.connect(user='test_user', password= '123456',
- #                              host='127.0.0.1',
- #                               database='mtc_autobuild')
- #  cnx_cursor=cnx.cursor()
-  #  insert_stmt =("INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s)" \
-  #      f" ON DUPLICATE KEY UPDATE highlights=values(highlights)")
-  #  data=(b, c, d)
-  #  cnx_cursor.execute(insert_stmt,data)
-   # cnx.commit()
-   # cnx.close()
+def storage_db(b,c,d):
+    #connection to database credentials
+    release_user =os.getenv('User_name')
+    release_pass =os.getenv('MTC_autobuild_pass)
+    release_host_name =os.getenv('MTC_autobuild_Host')
+    release_DB_name = os.getenv('DB_name')
+    conn='host=%s port 5432 dbname=%s user=%s password=%s'% (release_host_name, release_DB_name, release_user, release_pass)
+    with psycopg2.connect(conn) as connection:
+	    cur=connection.cursor()
+	    insert_stmt = "INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE highlights=values(highlights);" % (b, c, d)
+	    cur.execute(insert_stmt)
+	    cur.execute("commit")
+	    cur.close()
 
 
 # function to match the country name with the ISO code from the country_names csv file
@@ -116,7 +119,7 @@ def print_all():
  
 #def pushing_data():
  #   for country in country_isocode_description:
- #       storage_db(data_source_version,country.code, country.description)
+ #       storage_db(country.data_ver,country.code, country.description)
 
 
 pulling_data()
