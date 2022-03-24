@@ -33,7 +33,7 @@ def storage_db(b, c, d):
     release_pass = os.getenv('MTC_autobuild_pass')
     release_host_name = os.getenv('MTC_autobuild_Host')
     release_DB_name = os.getenv('DB_name')
-    conn = 'host=%s port=5432 dbname=%s user=%s password=%s' % (
+    conn = 'host=%s dbname=%s user=%s password=%s' % (
         release_host_name, release_DB_name, release_user, release_pass)
     with psycopg2.connect(conn) as connection:
         cur = connection.cursor()
