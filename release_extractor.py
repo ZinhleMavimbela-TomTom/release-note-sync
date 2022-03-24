@@ -38,8 +38,8 @@ def storage_db(data_ver, c_code, descript):
     insert_stmt = ("INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE highlights=values(highlights)")
     data = (data_ver, c_code, descript)
     conn_cursor.execute(insert_stmt, data)
-    conn_cursor.commit()
-    conn_cursor.close()
+    conn.commit()
+    conn.close()
 
 # function to match the country name with the ISO code from the country_names csv file
 def matching_country_code(name):
