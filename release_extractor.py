@@ -120,6 +120,6 @@ def print_all():
 
 
 pulling_data()
-print("Total Country Count: ", len(country_isocode_description)
+print("Total Country Count: ", len(country_isocode_description))
 print_all()
 #pushing_data()
