@@ -118,8 +118,8 @@ def print_all():
             
  
 def pushing_data():
-    for country in country_isocode_description:
-	storage_db(country.data_ver,country.code, country.description)
+   	for country in country_isocode_description:
+		storage_db(country.data_ver,country.code, country.description)
 
 
 pulling_data()
