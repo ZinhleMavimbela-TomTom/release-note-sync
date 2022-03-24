@@ -111,6 +111,7 @@ def print_all():
     for entry in country_isocode_description:
         print("__________________________________________________________________________________________________________________________________")
         print(entry.name,"(",entry.code,")-",entry.data_ver,"\n",entry.description)
+
             
  
 #def pushing_data():
@@ -119,5 +120,6 @@ def print_all():
 
 
 pulling_data()
+print("Total Country Count: ", len(country_isocode_description)
 print_all()
 #pushing_data()
