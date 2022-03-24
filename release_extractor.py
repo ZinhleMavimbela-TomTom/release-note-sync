@@ -26,7 +26,7 @@ class CountryData:
 def storage_db(b,c,d):
     #connection to database credentials
     release_user =os.getenv('User_name')
-    release_pass =os.getenv('MTC_autobuild_pass)
+    release_pass =os.getenv('MTC_autobuild_pass')
     release_host_name =os.getenv('MTC_autobuild_Host')
     release_DB_name = os.getenv('DB_name')
     conn='host=%s port 5432 dbname=%s user=%s password=%s'% (release_host_name, release_DB_name, release_user, release_pass)
