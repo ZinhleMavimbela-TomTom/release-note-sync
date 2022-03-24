@@ -7,8 +7,6 @@ import os
 folderpath= str(os.getenv("folderpath"))
 
 csvfilepath ='country_names.csv'
-#csvfilepath = str(os.getenv("csvfilepath"))
-
 #local container for country name and description
 country_isocode_description = []
 
