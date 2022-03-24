@@ -2,8 +2,7 @@ from bs4 import BeautifulSoup
 import re
 import csv
 import os
-import psycopg2
-import psycopg2.extras
+import mysql.connector 
 
 folderpath = str(os.getenv("folderpath"))
 
@@ -27,22 +26,20 @@ class CountryData:
         return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
 
 
-def storage_db(b, c, d):
+def storage_db(data_ver, c_code, descript):
     # connection to database credentials
     release_user = os.getenv('User_name')
     release_pass = os.getenv('MTC_autobuild_pass')
     release_host_name = os.getenv('MTC_autobuild_Host')
     release_DB_name = os.getenv('DB_name')
-    conn = 'host=%s dbname=%s user=%s password=%s' % (
-        release_host_name, release_DB_name, release_user, release_pass)
-    with psycopg2.connect(conn) as connection:
-        cur = connection.cursor()
-        insert_stmt = "INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE highlights=values(highlights);" % (
-            b, c, d)
-        cur.execute(insert_stmt)
-        cur.execute("commit")
-        cur.close()
-
+    
+    conn = mysql.connector.connect(user=release_user, password=release_pass, host=release_host_name, database=release_DB_name)
+    conn_cursor = conn.cursor()
+    insert_stmt = ("INSERT INTO release_notes (data_source_version, country, highlights) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE highlights=values(highlights)")
+    data = (data_ver, c_code, descript)
+    conn_cursor.execute(insert_stmt, data)
+    conn_cursor.commit()
+    conn_cursor.close()
 
 # function to match the country name with the ISO code from the country_names csv file
 def matching_country_code(name):
