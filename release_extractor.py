@@ -42,7 +42,7 @@ def matching_country_code(name):
         for row in datareader:
             if row[1]==name:
                 return row[0]
-            else
+            else:
                 if re.search(row[1], name):
                     return row[0]
         
