@@ -129,4 +129,4 @@ def pushing_data():
 pulling_data()
 print("Total Country Count: ", len(country_isocode_description))
 print_all()
-pushing_data()
+#pushing_data()
