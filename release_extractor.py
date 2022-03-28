@@ -20,11 +20,10 @@ class CountryData:
         self.data_ver = data_ver
         self.code = code
         self.description = description
- # printing helper
 
+    # printing helper
     def __str__(self):
         return "country name: %s, country ISO code: %s, \ndescription: %s" % (self.data_ver, self.name, self.code, self.description)
-
 
 def storage_db(data_ver, c_code, descript):
     # connection to database credentials
@@ -55,11 +54,10 @@ def matching_country_code(name):
 
         html_countryname.append(name)
 
-
 # main function to read the HTML file and parse through and extract the country name and the country description
-
 def pulling_data():
     file_list = os.listdir(folderpath)
+    
     for file in file_list:
         with open(os.path.join(folderpath, file), 'r') as html_file:
             content = html_file.read()
@@ -80,18 +78,20 @@ def pulling_data():
             # descriptions have the ul tag in the HTML file
             description_tags = soup.find_all('ul')
 
-            # remove extra spaces from the country names
             descriptions = []
             for d in description_tags:
-                # remove the extra spaces, random new lines, and tabs found in the descriptions
-                sanitize = re.sub(r"[\n\t]*", "", d.text)
-                sanitize = re.sub(' +', " ", sanitize)
-                # replace the periods with periods and new line
-                sanitize = re.sub(r'(\d+).(\d+)', r'\1-\2', sanitize)
-                sanitize = re.sub('\.', ".\n", sanitize)
-                sanitize = re.sub(r'(\d+)-(\d+)', r'\1.\2', sanitize)
-                sanitize = sanitize.strip()
-                descriptions.append(sanitize)
+                result = d.find_all("li")
+                country_descrip = []
+                for li in result:
+                    # fix random newlines, tabs, spaces in strings
+                    sanitize = u''.join(li.findAll(text=True))
+                    sanitize = re.sub(r"[\n\t]*", "", sanitize)
+                    sanitize = re.sub(' +', " ", sanitize)
+                    sanitize = sanitize.strip()
+                    country_descrip.append(sanitize)
+                descriptions.append(country_descrip)
+                del country_descrip
+
             # remove introduction and general from both country names and the descriptions
             del country_names[:2]
             del descriptions[:2]
@@ -111,22 +111,23 @@ def pulling_data():
             else:
                 print("Error sizes do not match")
 
-
 def print_all():
     # print to check
     print("____________________________________________________________________________________________________________________________________")
     for entry in country_isocode_description:
         print("__________________________________________________________________________________________________________________________________")
-        print(entry.name, "(", entry.code, ")-",
-              entry.data_ver, "\n", entry.description)
-
+        print(entry.name, "(", entry.code, ")-", entry.data_ver, "\n", entry.description)
 
 def pushing_data():
     for country in country_isocode_description:
-        storage_db(country.data_ver, country.code, country.description)
-
+        one_country_description_as_string = ""
+        for single in country.description:
+            one_country_description_as_string = one_country_description_as_string + single
+            one_country_description_as_string = one_country_description_as_string + "\n"
+        storage_db(country.data_ver, country.code, one_country_description_as_string)
+        one_country_description_as_string = ""
 
 pulling_data()
 print("Total Country Count: ", len(country_isocode_description))
 print_all()
-#pushing_data()
+pushing_data()
