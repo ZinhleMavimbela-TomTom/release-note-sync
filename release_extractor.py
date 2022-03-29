@@ -91,6 +91,7 @@ def pulling_data():
                     sanitize = u''.join(li.findAll(text=True))
                     sanitize = re.sub(r"[\n\t]*", "", sanitize)
                     sanitize = re.sub(' +', " ", sanitize)
+                    sanitize =re.sub('\xa0',"",sanitize)
                     sanitize = sanitize.strip()
                     country_descrip.append(sanitize)
                 descriptions.append(country_descrip)
