@@ -5,7 +5,7 @@ import os
 import mysql.connector 
 
 #folderpath = str(os.getenv("folderpath"))
-region =str(os.getenv("region"))
+region =str(os.getenv("regions"))
 version =str(os.getenv("version"))
 folderpath='/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes'
 
