@@ -60,9 +60,16 @@ def matching_country_code(name):
 # main function to read the HTML file and parse through and extract the country name and the country description
 def pulling_data():
     file_list = os.listdir(folderpath)
-    
-    for file in file_list:
-        with open(os.path.join(folderpath, file), 'r') as html_file:
+    pattern = f'highlights_and_improvements_mn_{region}_{data_version}.html'
+    for item in os.listdir(file_list):
+      if fnmatch.fnmatch(item, pattern):
+        os.path.join(file_list, item)
+      else:
+        raise Exception(f'ERROR: unable to find "{pattern}" in {file_list}')
+        break
+
+    #for file in file_list:
+    with open(os.path.join(folderpath, file), 'r') as html_file:
             content = html_file.read()
             soup = BeautifulSoup(content, 'html.parser')
             # get the data source version from the html title
@@ -113,7 +120,7 @@ def pulling_data():
                         country_names[i], data_source_version, iso_codes[i], descriptions[i]))
             else:
                 print("Error sizes do not match")
-
+    
 def print_all():
     # print to check
     print("____________________________________________________________________________________________________________________________________")
