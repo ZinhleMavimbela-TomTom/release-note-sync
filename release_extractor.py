@@ -139,7 +139,7 @@ if (len(unmatched_countries) == 0):
     print("Pushing to Database")
     #pushing_data()
 else:
-    print("These countries have no match in the csv file, please update csv file firstly: ")
+    print("ERROR: These countries have no match in the csv file, please update csv file firstly and run again: ")
     for unmatch in unmatched_countries:
         print(unmatch)
         
