@@ -104,6 +104,7 @@ def pulling_data():
             for country_name in country_names:
                 iso = matching_country_code(country_name)
                 iso_codes.append(iso)
+                print(iso)
                 if re.search(iso, 'None'):
                     unmatched_countries.append(iso)
 
