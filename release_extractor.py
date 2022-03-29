@@ -14,10 +14,10 @@ csvfilepath = 'country_names.csv'
 # local container for country name and description
 country_isocode_description = []
 
+# list to hold all countries with no country code found
+unmatched_country_name = []
+
 # class CountryData is to hold the name, the ISO code, and the description of each country found in the HTML file
-html_countryname = []
-
-
 class CountryData:
     def __init__(self, name, data_ver, code, description):
         self.name = name
@@ -55,8 +55,8 @@ def matching_country_code(name):
             else:
                 if re.search(row[1], name):
                     return row[0]
-
-        html_countryname.append(name)
+                else:
+                    unmatched_country_name.append(name)
 
 # main function to read the HTML file and parse through and extract the country name and the country description
 def pulling_data():
@@ -135,4 +135,10 @@ def pushing_data():
 pulling_data()
 print("Total Country Count: ", len(country_isocode_description))
 print_all()
-#pushing_data()
+if not unmatched_country_name:
+    print("Pushing to Database")
+    #pushing_data()
+else:
+    print("The following countries have have not been found in the csv file, please update firstly")
+    for unmatch in unmatched_country_name:
+        print(unmatch)
