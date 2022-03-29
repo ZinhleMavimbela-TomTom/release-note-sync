@@ -104,9 +104,8 @@ def pulling_data():
             for country_name in country_names:
                 iso = matching_country_code(country_name)
                 iso_codes.append(iso)
-                print(type(iso))
-                if re.search(iso, 'None'):
-                    unmatched_countries.append(iso)
+                if iso is None:
+                    unmatched_countries.append(country_name)
 
              # order matters, so first error checking is to make sure there is a 1:1:1 correlation between all individual lists
             if(len(country_names) == len(iso_codes) == len(descriptions)):
