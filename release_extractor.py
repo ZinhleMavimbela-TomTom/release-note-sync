@@ -65,6 +65,7 @@ def pulling_data():
     for item in os.listdir(file_list):
       if fnmatch.fnmatch(item, pattern):
         os.path.join(file_list, item)
+        print("found")
       else:
         raise Exception(f'ERROR: unable to find "{pattern}" in {file_list}')
         break
