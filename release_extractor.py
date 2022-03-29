@@ -60,7 +60,7 @@ def matching_country_code(name):
 # main function to read the HTML file and parse through and extract the country name and the country description
 def pulling_data():
     file_list = os.listdir(folderpath)
-    pattern = f'highlights_and_improvements_mn_{region}_{data_version}.html'
+    pattern = f'highlights_and_improvements_mn_{region}_{version}.html'
     for item in os.listdir(file_list):
       if fnmatch.fnmatch(item, pattern):
         os.path.join(file_list, item)
