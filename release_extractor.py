@@ -7,7 +7,7 @@ import mysql.connector
 #folderpath = str(os.getenv("folderpath"))
 region =str(os.getenv("regions"))
 version =str(os.getenv("version"))
-folderpath=f'/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes/whats_new'
+
 
 csvfilepath = 'country_names.csv'
 # local container for country name and description
@@ -59,7 +59,7 @@ def matching_country_code(name):
 
 # main function to read the HTML file and parse through and extract the country name and the country description
 def pulling_data():
-    file_list = os.listdir(folderpath)
+    file_list = f'/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes/whats_new'
     pattern = f'highlights_and_improvements_mn_{region}_{version}.html'
     for item in os.listdir(file_list):
       if fnmatch.fnmatch(item, pattern):
