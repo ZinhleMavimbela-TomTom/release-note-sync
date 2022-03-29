@@ -62,16 +62,8 @@ def matching_country_code(name):
 def pulling_data():
     file_list = f'/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes/whats_new/'
     pattern = f'highlights_and_improvements_mn_{region}_{version}*.html'
-    for item in os.listdir(file_list):
-      if fnmatch.fnmatch(item, pattern):
-        os.path.join(file_list, item)
-        print("found")
-      else:
-        raise Exception(f'ERROR: unable to find "{pattern}" in {file_list}')
-        break
-
-    #for file in file_list:
-    with open(os.path.join(folderpath, file), 'r') as html_file:
+    
+    with open(os.path.join(file_list, pattern), 'r') as html_file:
             content = html_file.read()
             soup = BeautifulSoup(content, 'html.parser')
             # get the data source version from the html title
