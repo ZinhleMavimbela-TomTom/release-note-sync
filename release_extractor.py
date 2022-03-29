@@ -61,7 +61,7 @@ def matching_country_code(name):
 # main function to read the HTML file and parse through and extract the country name and the country description
 def pulling_data():
     file_list = f'/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes/whats_new/'
-    pattern = f'highlights_and_improvements_mn_{region}_{version}*.html'
+    pattern = f'highlights_and_improvements_mn_{region}_{version}.html'
     
     with open(os.path.join(file_list, pattern), 'r') as html_file:
             content = html_file.read()
