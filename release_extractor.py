@@ -5,7 +5,7 @@ import os
 import mysql.connector 
 import fnmatch
 
-#folderpath = str(os.getenv("folderpath"))
+
 region =str(os.getenv("regions"))
 version =str(os.getenv("version"))
 
