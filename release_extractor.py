@@ -134,7 +134,7 @@ def pushing_data():
 
 pulling_data()
 print("Total Country Count: ", len(country_isocode_description))
-print_all()
+
 if (len(unmatched_countries) == 0):
     print("Pushing to Database")
     #pushing_data()
@@ -142,3 +142,5 @@ else:
     print("These countries have no match in the csv file, please update csv file firstly: ")
     for unmatch in unmatched_countries:
         print(unmatch)
+        
+print_all()
