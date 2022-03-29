@@ -7,7 +7,7 @@ import mysql.connector
 #folderpath = str(os.getenv("folderpath"))
 region =str(os.getenv("regions"))
 version =str(os.getenv("version"))
-folderpath='/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes'
+folderpath=f'/share/nds-sources/products/commercial/{region}{version}/documentation/mn/release_notes/release_notes/whats_new'
 
 csvfilepath = 'country_names.csv'
 # local container for country name and description
