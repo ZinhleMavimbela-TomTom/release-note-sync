@@ -90,6 +90,18 @@ def pulling_data():
                     sanitize = re.sub(r"[\n\t]*", "", sanitize)
                     sanitize = re.sub(' +', " ", sanitize)
                     sanitize =re.sub('\xa0',"",sanitize)
+                    if ((len(remove_keyword))!=0):
+                        split_remove =remove_keyword.split(",")
+                        for i in range(len(split_remove)):
+                            sanitize=re.sub(split_remove[i], "",sanitize)
+                    if ((len(change_from)!=0) and (len(change_to)!=0)):
+                        #splits the change parameter 1 and change parameter 2 if there are multiple parameters 
+                        split_change_to = change_to.split(",")
+                        split_change_from = change_from.split(",")
+                        #loops through the str array with divided words and does replacement by mapping the words 
+                        #for example "Approximately" updated to "change" therefore split_change_to[0] maps to split_change_to[0]
+                        for m,j in zip(range(len(split_change_to)),range(len(split_change_from))):
+                            sanitize=re.sub(split_change_from[m],split_change_to[j],sanitize)
                     sanitize = sanitize.strip()
                     country_descrip.append(sanitize)
                 descriptions.append(country_descrip)
