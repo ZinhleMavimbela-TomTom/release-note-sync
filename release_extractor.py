@@ -8,7 +8,9 @@ import fnmatch
 
 region =str(os.getenv("regions"))
 version =str(os.getenv("version"))
-
+remove_keyword= str(os.getenv("Remove_Word"))
+change_from = str(os.getenv("Change_parameter1"))
+change_to = str(os.getenv("Change_parameter2"))
 
 csvfilepath = 'country_names.csv'
 # local container for country name and description
