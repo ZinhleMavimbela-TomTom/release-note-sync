@@ -110,8 +110,8 @@ def pulling_data():
                 del country_descrip
 
             # remove introduction and general from both country names and the descriptions
-            del country_names[:2]
-            del descriptions[:2]
+            del country_names[:1]
+            del descriptions[:1]
 
             # find the ISO codes based on the country name
             iso_codes = []
