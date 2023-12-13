@@ -129,12 +129,15 @@ def pulling_data():
                         country_names[i], data_source_version, iso_codes[i], descriptions[i]))
             else:
                 print("Error sizes do not match")
+                print(len(country_names))
                 for country in country_names:
                     print(country)
                 print("------")
+                print(len(iso_codes))
                 for iso in iso_codes:
                     print(iso)
                 print("------")
+                print(len(descriptions))
                 for description in descriptions:
                     print(description)
                 print("------")
