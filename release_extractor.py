@@ -80,7 +80,7 @@ def pulling_data():
                 country_names.append(sanitize)
 
             # descriptions have the ul tag in the HTML file
-            description_tags = soup.find_all('ul')
+            description_tags = soup.find_all("ul", {"class": "CountryRemark"})
 
             descriptions = []
             for d in description_tags:
